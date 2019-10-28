@@ -48,11 +48,11 @@ int main(){
 
     p = HEAD;
     q = (node*)malloc(sizeof(node)); //create a new node
-    q->data = y;
+    q->data = x;
     while(p != NULL){
             if(p->data == y){
-                q->next = p;
-                q->prev = p->prev->next;
+                q->next = p; //link the RC of new node to p
+                p->prev->next = q;  //reassign the node before p to point to the new node q
             }
             p = p->next;  //keep moving to the next p
             }
