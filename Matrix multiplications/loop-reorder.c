@@ -1,3 +1,5 @@
+/** Probably separating them into different files and running them separately will have a better/more predictable result **/
+
 #include <stdio.h>
 #include <time.h> 
 #include <stdlib.h>
