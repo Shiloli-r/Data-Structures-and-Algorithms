@@ -4,7 +4,7 @@
 
 
 int main(){
-    int dimension = 4;
+    int dimension = 50;
     
     int A[dimension][dimension], B[dimension][dimension], C[dimension][dimension];
     int i, j, k;
@@ -17,13 +17,6 @@ int main(){
             A[i][j] = rand() % 5;
         }
     }
-    printf("\n Random Matrix A: \n");
-     for(int i=0; i<dimension; i++){
-        for(int j=0; j<dimension; j++){
-            printf("%d  ", A[i][j]);
-        }
-        printf("\n");
-    }
 
     // create a random matrix B
      for (i = 0; i < dimension; i++)
@@ -33,13 +26,10 @@ int main(){
             B[i][j] = rand() % 5;
         }
     }
-     printf("\n Random Matrix B: \n");
-     for(int i=0; i<dimension; i++){
-        for(int j=0; j<dimension; j++){
-            printf("%d  ", B[i][j]);
-        }
-        printf("\n");
-    }
+
+    /************************************ i - j - k ***********************************/
+    clock_t t;
+    t = clock();
 
     for (int i = 0; i < dimension; i++)
     {
@@ -52,14 +42,75 @@ int main(){
             }
         }
     }
+    t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
 
-    for(int i=0; i<dimension; i++){
-        for(int j=0; j<dimension; j++){
-            printf("%d  ", C[i][j]);
+
+    printf("Time Taken (i-j-k): %f seconds \n", time_taken);
+    /*************************************************************************************/
+
+
+    /************************************ j - i - k ***********************************/
+    t = clock();
+
+    for (int j = 0; j < dimension; j++)
+    {
+        for (int i = 0; i < dimension; i++)
+        {
+            C[i][j] = 0;
+            for (int k = 0; k < dimension; k++)
+            {
+                C[i][j] = C[i][j] + A[i][k] * B[k][j];
+            }
         }
-        printf("\n");
     }
+    t = clock() - t;
+    time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
 
+
+    printf("Time Taken (j-i-k): %f seconds\n", time_taken);
+    /*************************************************************************************/
+
+    /************************************ k - j - i ***********************************/
+    t = clock();
+
+    for (int k = 0; k < dimension; k++)
+    {
+        for (int j = 0; j < dimension; j++)
+        {
+            C[i][j] = 0;
+            for (int i = 0; i < dimension; i++)
+            {
+                C[i][j] = C[i][j] + A[i][k] * B[k][j];
+            }
+        }
+    }
+    t = clock() - t;
+    time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+
+    printf("Time Taken (k-j-i): %f seconds\n", time_taken);
+    /*************************************************************************************/
+
+
+    /************************************ j - k - i ***********************************/
+    t = clock();
+
+    for (int j = 0; j < dimension; j++)
+    {
+        for (int k = 0; k < dimension; k++)
+        {
+            C[i][j] = 0;
+            for (int i = 0; i < dimension; i++)
+            {
+                C[i][j] = C[i][j] + A[i][k] * B[k][j];
+            }
+        }
+    }
+    t = clock() - t;
+    time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+
+    printf("Time Taken (j-k-i): %f seconds\n", time_taken);
+    /*************************************************************************************/
 
     return 0;
 }
