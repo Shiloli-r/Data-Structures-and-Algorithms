@@ -4,7 +4,7 @@
 
 
 int main(){
-    int dimension = 4;
+    int dimension = 50;
     
     int A[dimension][dimension], B[dimension][dimension], C[dimension][dimension];
     int i, j, k;
