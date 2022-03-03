@@ -7,6 +7,14 @@ void swap(int *xp, int *yp){
     *yp = temp;
 }
 
+
+/* Function to print an array */
+void printArray(int arr[], int size){
+    for (int i=0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
 /* Optimization is such that the sorting ends when the inner loop doesn't swap anything */
 void bubbleSort(int arr[], int n){
     bool swapped;
@@ -16,22 +24,13 @@ void bubbleSort(int arr[], int n){
             if(arr[j] > arr[j+1])
             swap(&arr[j], &arr[j+1]);
             swapped = true;
+            printArray(arr, n);
         }
 
         if(!swapped) // If no elements were swapped
             break;
     }
 }
-
-/* Function to print an array */
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
-
 
 int main(){
 
