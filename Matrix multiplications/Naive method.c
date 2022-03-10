@@ -1,32 +1,60 @@
-/* 
-    The simplest Matrix Multiplication Method
-*/
-
 #include <stdio.h>
-#define N 2
-#define P 3
-#define M 2
+#include <time.h> 
+#include <stdlib.h>
 
 
-int main()
-{
-    int A[N][P] = {{1, 2, 3}, {4, 5, 6}},
-        B[P][M] = {{7, 8}, {9, 10}, {11, 12}},
-        C[N][M];
-    for (int i = 0; i < N; i++)
+int main(){
+    int dimension = 4;
+    
+    int A[dimension][dimension], B[dimension][dimension], C[dimension][dimension];
+    int i, j, k;
+
+    // create a random matrix A
+     for (i = 0; i < dimension; i++)
     {
-        for (int j = 0; j < M; j++)
+        for (j = 0; j < dimension; j++)
+        {
+            A[i][j] = rand() % 5;
+        }
+    }
+    printf("\n Random Matrix A: \n");
+     for(int i=0; i<dimension; i++){
+        for(int j=0; j<dimension; j++){
+            printf("%d  ", A[i][j]);
+        }
+        printf("\n");
+    }
+
+    // create a random matrix B
+     for (i = 0; i < dimension; i++)
+    {
+        for (j = 0; j < dimension; j++)
+        {
+            B[i][j] = rand() % 5;
+        }
+    }
+     printf("\n Random Matrix B: \n");
+     for(int i=0; i<dimension; i++){
+        for(int j=0; j<dimension; j++){
+            printf("%d  ", B[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < dimension; i++)
+    {
+        for (int j = 0; j < dimension; j++)
         {
             C[i][j] = 0;
-            for (int k = 0; k < P; k++)
+            for (int k = 0; k < dimension; k++)
             {
                 C[i][j] = C[i][j] + A[i][k] * B[k][j];
             }
         }
     }
 
-    for(int i=0; i<N; i++){
-        for(int j=0; j<M; j++){
+    for(int i=0; i<dimension; i++){
+        for(int j=0; j<dimension; j++){
             printf("%d  ", C[i][j]);
         }
         printf("\n");
