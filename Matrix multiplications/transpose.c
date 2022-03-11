@@ -95,5 +95,36 @@ int main(){
 
     printf("\n Time taken is: %f seconds", time_taken);
 
+    // Transpose experiments
+        // Multiplication
+    t = clock();
+    for (i = 0; i < Value; i++)
+    {
+        for (j = 0; j < Value; j++)
+        {
+            c[i][j] = 0;
+            for (k = 0; k < Value; k++)
+            {
+                c[i][j] = c[i][j] + a[i][k] * T[j][k];
+            }
+        }
+    }
+
+    
+    t = clock() - t;
+    time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("\nThe results after transposing is \n");
+    for (i = 0; i < Value; i++)
+    {
+        for (j = 0; j < Value; j++)
+        {
+            printf("%lld ", c[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n Time taken is: %f seconds", time_taken);
+
+
     return 0;
 }
