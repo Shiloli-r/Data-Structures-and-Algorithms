@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> 
+#include <time.h>
 
-int main(){
+int main()
+{
 
-
-    long long int Value = 200;
+    long long int Value = 10;
 
     int a[Value][Value], b[Value][Value], c[Value][Value], T[Value][Value];
     int i, j, k;
 
+    int blockSize = 5; // Should be a multiple of the matrix size
 
     // First Matrix
-   // printf(" First Matrix: \n");
+    // printf(" First Matrix: \n");
     for (i = 0; i < Value; i++)
     {
         for (j = 0; j < Value; j++)
@@ -30,8 +31,9 @@ int main(){
     // }
 
     // Second Matrix
-  //  printf("\n Second Matrix: \n");
-    for (i = 0; i < Value; i++){
+    //  printf("\n Second Matrix: \n");
+    for (i = 0; i < Value; i++)
+    {
         for (j = 0; j < Value; j++)
         {
             b[i][j] = rand() % 5;
@@ -49,13 +51,14 @@ int main(){
     // }
 
     // transpose Second matrix
-    for(int i = 0; i<Value; i++){
-        for(int j=0; j<Value; j++){
+    for (int i = 0; i < Value; i++)
+    {
+        for (int j = 0; j < Value; j++)
+        {
             T[j][i] = b[i][j];
         }
-
     }
-        // print transpose of second matrix
+    // print transpose of second matrix
     //     printf("\n Transpose of Second Matrix: \n");
     //   for (i = 0; i < Value; i++)
     // {
@@ -79,10 +82,9 @@ int main(){
                 c[i][j] = c[i][j] + a[i][k] * b[k][j];
             }
         }
-    }    
+    }
     t = clock() - t;
-    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-
+    double time_taken = ((double)t) / CLOCKS_PER_SEC; // in seconds
 
     // printf("\nThe results is \n");
     // for (i = 0; i < Value; i++)
@@ -97,21 +99,27 @@ int main(){
     printf("\n Time taken is: %f seconds", time_taken);
 
     // Transpose experiments
-        // Multiplication
+    // Multiplication
     t = clock();
-    for (i = 0; i < Value; i++)
+    for (i = 0; i < Value; i += blockSize) // row
     {
-        for (j = 0; j < Value; j++)
+        for (j = 0; j < Value; j += blockSize)
         {
-            c[i][j] = 0;
-            for (k = 0; k < Value; k++)
+            for (int blockRow = i; blockRow < i + blockSize; blockRow++)
             {
-                c[i][j] = c[i][j] + a[i][k] * T[j][k];
+                for (int blockCol = j; blockCol < j + blockSize; blockCol++)
+                {
+                    c[i][j] = 0;
+                    for (k = 0; k < Value; k++)
+                    {
+                        c[i][j] = c[i][j] + a[blockRow][k] * T[blockCol][k];
+                    }
+                }
             }
         }
-    }    
+    }
     t = clock() - t;
-    time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    time_taken = ((double)t) / CLOCKS_PER_SEC; // in seconds
 
     // printf("\nThe results after transposing is \n");
     // for (i = 0; i < Value; i++)
@@ -124,7 +132,6 @@ int main(){
     // }
 
     printf("\n Time taken after transpose is: %f seconds", time_taken);
-
 
     return 0;
 }
