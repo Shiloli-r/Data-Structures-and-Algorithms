@@ -5,12 +5,12 @@
 int main()
 {
 
-    long long int Value = 10;
+    long long int Value = 300;
 
     int a[Value][Value], b[Value][Value], c[Value][Value], T[Value][Value];
     int i, j, k;
 
-    int blockSize = 5; // Should be a multiple of the matrix size
+    int blockSize = 50; // Should be a multiple of the matrix size
 
     // First Matrix
     // printf(" First Matrix: \n");
